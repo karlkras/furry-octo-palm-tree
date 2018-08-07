@@ -3,13 +3,21 @@ import * as constants from '../actions/constants';
 
 /* global expect */
 describe('balanceReducer', () => {
-    it('sets a balance', () => {
+    describe('when initializing', () => {
         const balance = 10;
-        const actionType = { type: constants.SET_BALANCE, balance };
-        
-        expect(balanceReducer(undefined, actionType)).toEqual(balance);
-    });
     
+        it('sets a balance', () => {
+            const actionType = { type: constants.SET_BALANCE, balance };
+            expect(balanceReducer(undefined, actionType)).toEqual(balance);
+        });
+        
+        describe('then re-initialing', () => {
+            it('reads the balance from cookies', () => {
+                expect(balanceReducer(undefined, {})).toEqual(balance);
+            });
+        });
+    });
+
     it('makes a deposit', () => {
         const deposit = 10;
         const initialBalance = 5;
